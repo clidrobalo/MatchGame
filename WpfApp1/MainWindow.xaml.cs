@@ -20,6 +20,9 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        TextBlock lastTextBlockClicked;
+        bool findingMatch = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,9 +37,9 @@ namespace WpfApp1
                 "🤣", "🤣",
                 "😍", "😍",
                 "👌", "👌",
-                "🤷‍", "🤷",
-                "🤳", "🤳‍",
-                "💻", "👓",
+                "‍🏍", "🏍",
+                "🤳", "🤳",
+                "💻", "💻",
                 "🎶", "🎶"
             };
 
@@ -51,21 +54,37 @@ namespace WpfApp1
             }
         }
 
-        public void TextBlock_MouseDown()
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             /* If it's the first in the
-            * pair being clicked, keep
-            * track of which TextBlock
-            * was clicked and make the
-            * animal disappear. If
-            * it's the second one,
-            * either make it disappear
-            * (if it's a match) or
-            * bring back the first one
-            * (if it's not).
-            */
+           * pair being clicked, keep
+           * track of which TextBlock
+           * was clicked and make the
+           * animal disappear. If
+           * it's the second one,
+           * either make it disappear
+           * (if it's a match) or
+           * bring back the first one
+           * (if it's not).
+           */
 
-
+            TextBlock textBlock = sender as TextBlock;
+            if (!findingMatch)
+            {
+                textBlock.Visibility = Visibility.Hidden;
+                lastTextBlockClicked = textBlock;
+                findingMatch = true;
+            } 
+            else if(textBlock.Text.Equals(lastTextBlockClicked.Text))
+            {
+                textBlock.Visibility = Visibility.Hidden;
+                findingMatch = false;
+            }
+            else
+            {
+                lastTextBlockClicked.Visibility = Visibility.Visible;
+                findingMatch = false;
+            }
         }
     }
 }
