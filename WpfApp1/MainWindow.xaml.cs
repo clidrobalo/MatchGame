@@ -50,5 +50,22 @@ namespace WpfApp1
                 animalEmoji.RemoveAt(idx);
             }
         }
+
+        public void TextBlock_MouseDown()
+        {
+            /* If it's the first in the
+            * pair being clicked, keep
+            * track of which TextBlock
+            * was clicked and make the
+            * animal disappear. If
+            * it's the second one,
+            * either make it disappear
+            * (if it's a match) or
+            * bring back the first one
+            * (if it's not).
+            */
+
+
+        }
     }
 }
